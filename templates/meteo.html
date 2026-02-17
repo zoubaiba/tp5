@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>TP Météo</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .error { color: red; background: #fee; padding: 10px; border: 1px solid red; }
+        .info-meteo { background: #f0f8ff; padding: 15px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+    <h1>Météo : 2ième partie</h1> 
+    <form action="/" method="GET">
+        <input type="text" name="city" placeholder="Ville" required> 
+        <input type="submit" value="Valider"> 
+    </form>
+
+    <hr>
+
+    {# 1. Cas d'erreur (Quota API dépassé - Code 106) #}
+    {% if data.success == False %}
+        <div class="error">
+            <h3>Erreur API</h3>
+            <p>{{ data.error.info }}</p>
+        </div>
+
+    {# 2. Cas de succès (Affichage des données de ton dictionnaire) #}
+    {% elif data.location %}
+        <div class="info-meteo">
+            <h2>Météo à {{ data.location.name }}</h2> <p><strong>Température :</strong> {{ data.current.temperature }} degrés Celsius</p> <p><strong>Vitesse du vent :</strong> {{ data.current.wind_speed }} km/h</p> <p><strong>Précipitations :</strong> {{ data.current.precip }} mm</p> <p><em>Description : {{ data.current.weather_descriptions[0] }}</em></p>
+            <img src="{{ data.current.weather_icons[0] }}" alt="Icône météo">
+        </div>
+
+    {# 3. Cas initial (Aucune recherche faite) #}
+    {% else %}
+        <p>Veuillez saisir une ville pour obtenir la météo.</p>
+    {% endif %}
+
+</body>
+</html>
