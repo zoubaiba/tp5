@@ -5,13 +5,12 @@
     <title>TP Météo</title>
     <style>
         body { font-family: sans-serif; margin: 20px; }
-        .error { color: red; background: #fee; padding: 10px; border: 1px solid red; }
         .info-meteo { background: #f0f8ff; padding: 15px; border-radius: 8px; }
     </style>
 </head>
 <body>
 
-    <h1>Météo : 2ième partie</h1> 
+    <h1>Météo : </h1> 
     <form action="/" method="GET">
         <input type="text" name="city" placeholder="Ville" list="stations-list" required> 
         <datalist id="stations-list">
@@ -30,7 +29,7 @@
             <img src="{{ data.current.weather_icons[0] }}" alt="Icône météo">
         </div>
 
-    {# 3. Cas initial (Aucune recherche faite) #}
+{# Cas si aucune ville n'est trouvée ou au premier chargement #}
     {% else %}
         <p>Veuillez saisir une ville pour obtenir la météo.</p>
     {% endif %}
