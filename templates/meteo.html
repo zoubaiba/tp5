@@ -13,7 +13,12 @@
 
     <h1>Météo : 2ième partie</h1> 
     <form action="/" method="GET">
-        <input type="text" name="city" placeholder="Ville" required> 
+        <input type="text" name="city" placeholder="Ville" list="stations-list" required> 
+        <datalist id="stations-list">
+            {% for station in stations %}
+            <option value="{{ station }}">
+            {% endfor %}
+        </datalist>
         <input type="submit" value="Valider"> 
     </form>
 
